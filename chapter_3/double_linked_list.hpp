@@ -17,14 +17,14 @@ class DLinkedList{
     public:
         DLinkedList();
         ~DLinkedList();
-        const T& front();
-        const T& back();
-        bool empty();
+        T& front() const;
+        T& back() const;
+        bool empty() const;
         void addFront(const T&);
         void addBack(const T&);
         void removeFront();
         void removeBack();
-
+        void printList();
     private:
         DNode<T> *header;
         DNode<T> *trailer;
@@ -44,12 +44,12 @@ trailer->prev = header;
 }
 
 template <typename T>
-bool DLinkedList<T>::empty(){
+bool DLinkedList<T>::empty() const{
     return (header->next==trailer);
 }
 
 template <typename T>
-const T& DLinkedList<T>::front()
+T& DLinkedList<T>::front() const
 {
 if(!(empty())){
     return (header->next->data);
@@ -57,7 +57,8 @@ if(!(empty())){
 }
 
 template <typename T>
-const T& DLinkedList<T>::back(){
+T& DLinkedList<T>::back() const
+{
     if(!(empty())){
         return trailer->prev->data;
     }
@@ -119,4 +120,17 @@ delete header;
 delete trailer;
 }
 
+template<typename T>
+void DLinkedList<T>::printList(){
+    DLinkedList<T> del;
+while(!(empty())){
+    std::cout<<"Element: "<<front()<<std::endl;
+    del.addFront(front());
+    removeFront();
+}
+while(!(del.empty())){
+    addFront(del.front());
+    del.removeFront();
+}
 
+}

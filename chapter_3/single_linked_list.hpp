@@ -15,10 +15,10 @@ class SLinkedList{
     public:
         SLinkedList();
         ~SLinkedList();
-        const T get_element();
+        T get_element() const;
         void add(const T&);
         void remove();
-        bool empty();
+        bool empty() const;
     private:
         SNode<T> *head;
 };
@@ -37,12 +37,12 @@ SLinkedList<T>::~SLinkedList(){
 }
 
 template <typename T>
-bool SLinkedList<T>::empty(){
+bool SLinkedList<T>::empty() const {
 return (head==nullptr);
 }
 
 template <typename T>
-const T SLinkedList<T>::get_element(){
+T SLinkedList<T>::get_element() const{
     return head->elem;
 }
 
